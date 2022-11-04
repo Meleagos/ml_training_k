@@ -1,0 +1,21 @@
+schema: '2.0'
+stages:
+  download-data:
+    cmd: dvc get-url s3://danmartinec-iterative-bucket/data_registry/data/coco17_sample/
+      data/training
+    params:
+      configs/segments.yml:
+        config:
+          s3_path: s3://danmartinec-iterative-bucket/data_registry/data/coco17_sample/
+    outs:
+    - path: data/training
+      md5: 3ed4bf57846ec8c6899fecb8538bdd9f.dir
+      size: 23221428
+      nfiles: 154
+  train:
+    cmd: python -c "print('Training ...')"
+    deps:
+    - path: data/training
+      md5: 3ed4bf57846ec8c6899fecb8538bdd9f.dir
+      size: 23221428
+      nfiles: 154

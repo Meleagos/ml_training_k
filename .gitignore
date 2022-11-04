@@ -1,0 +1,3 @@
+.dvc/
+.venv/
+data/training/

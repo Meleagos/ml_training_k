@@ -1,0 +1,16 @@
+stages:
+  download-data:
+    cmd: dvc get-url ${config.s3_path} data/training
+    params:
+      - configs/segments.yml:
+        - config
+    vars:
+      - configs/segments.yml
+    outs:
+      - data/training:
+          cache: false
+    
+  train:
+    cmd: python -c "print('Training ...')"
+    deps:
+      - data/training
